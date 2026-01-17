@@ -1,0 +1,26 @@
+{
+  "name": "flex-engine",
+  "version": "1.0.0",
+  "description": "A neo-brutalist kinetic typography engine and visual studio",
+  "main": "flex.js",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adithyapaib/flex.git"
+  },
+  "keywords": [
+    "animation",
+    "typography",
+    "kinetic",
+    "video-generation",
+    "visual-editor"
+  ],
+  "author": "Adithya Pai B",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adithyapaib/flex/issues"
+  },
+  "homepage": "https://github.com/adithyapaib/flex#readme"
+}

@@ -1,0 +1,178 @@
+:root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --primary-color: #FFDE00; /* Yellow */
+    --accent-color: #FF6B6B;
+    --border-width: 3px;
+    --border-style: solid;
+    --border-color: #000000;
+    --shadow-offset: 5px;
+    --font-main: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-main);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+/* =========================================
+   FLEX Layouts
+   ========================================= */
+
+#container {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.scene {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.scene.invert {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+}
+
+/* =========================================
+   Neo-Brutalist Components
+   ========================================= */
+
+.brutal-btn {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: var(--border-width) var(--border-style) var(--border-color);
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--border-color);
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    font-weight: 900;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: transform 0.1s, box-shadow 0.1s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.brutal-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: calc(var(--shadow-offset) + 2px) calc(var(--shadow-offset) + 2px) 0px 0px var(--border-color);
+}
+
+.brutal-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px 0px var(--border-color);
+}
+
+.brutal-card {
+    border: var(--border-width) solid var(--border-color);
+    padding: 2rem;
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--border-color);
+    background: white;
+}
+
+/* =========================================
+   Animations
+   ========================================= */
+
+/* Typing Effect */
+.typing-line {
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 0.15em solid transparent; /* Cursor */
+    width: 0;
+}
+
+.typing-active {
+    animation: typing 1.5s steps(30, end) forwards, blink 0.75s step-end infinite;
+    border-right-color: var(--text-color);
+    width: var(--target-width); /* variable set by JS */
+    transition: width 1.5s steps(30, end);
+}
+
+.typing-done {
+    width: auto;
+    border-right-color: transparent;
+}
+
+@keyframes blink {
+    from, to { border-color: transparent }
+    50% { border-color: var(--text-color) }
+}
+
+/* Standard Motions */
+.pop-in {
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    opacity: 0;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.slide-up {
+    animation: slideUp 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+@keyframes slideUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.zoom-out {
+    animation: zoomOut 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    transform: scale(1.5);
+    opacity: 0;
+}
+
+@keyframes zoomOut {
+    to { transform: scale(1); opacity: 1; }
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.5s ease-out forwards;
+    opacity: 0;
+    transform: translateX(-50px);
+}
+
+@keyframes slideInLeft {
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Matrix Effect */
+@keyframes matrix-fall {
+    0% { transform: translateY(-100%); opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0.8; }
+}
+
+/* Word Cycler */
+.word-cycler-wrapper {
+    height: 1.25em; /* Approximately one line height */
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: bottom;
+}

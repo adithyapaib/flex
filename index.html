@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLEX | Neo-Brutalist Animation Engine</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: var(--bg-color);
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            border-bottom: var(--border-width) solid var(--border-color);
+            background: var(--bg-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            background: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border: var(--border-width) solid var(--border-color);
+            box-shadow: 4px 4px 0 0 black;
+            transition: transform 0.1s;
+        }
+        
+        .logo:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 0 black;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 85vh;
+            border-bottom: var(--border-width) solid var(--border-color);
+        }
+
+        .hero-preview {
+            position: relative;
+            background: #000;
+            overflow: hidden;
+            border-right: var(--border-width) solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Mobile adjustment */
+        @media (max-width: 768px) {
+            .hero { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
+            .hero-preview { border-right: none; border-bottom: var(--border-width) solid var(--border-color); }
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 4rem;
+            background: white;
+            position: relative;
+        }
+
+        .hero-tag {
+            font-family: var(--font-mono);
+            background: black;
+            color: white;
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            align-self: flex-start;
+            text-transform: uppercase;
+        }
+
+        .hero-text h1 {
+            font-size: 5rem;
+            margin: 0;
+            text-transform: uppercase;
+            line-height: 0.9;
+            letter-spacing: -0.05em;
+            margin-bottom: 2rem;
+        }
+
+        .hero-text p {
+            font-size: 1.5rem;
+            max-width: 500px;
+            font-weight: 500;
+            line-height: 1.4;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            border-bottom: var(--border-width) solid var(--border-color);
+        }
+
+        .feature-box {
+            padding: 4rem 3rem;
+            border-right: var(--border-width) solid var(--border-color);
+            border-bottom: var(--border-width) solid var(--border-color);
+            background: var(--primary-color);
+            transition: all 0.2s;
+            position: relative;
+        }
+        
+        .feature-box:nth-child(2) { background: #fff; }
+        .feature-box:nth-child(3) { background: #000; color: #fff; }
+
+        .feature-box:hover {
+            transform: translate(-5px, -5px);
+            box-shadow: 10px 10px 0 0 rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        .feature-box h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+
+        .feature-box p {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        footer {
+            padding: 4rem 2rem;
+            background: black;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #preview-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Abstract shapes */
+        .shape {
+            position: absolute;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Flex</div>
+        <nav>
+            <a href="https://github.com/google-deepmind" target="_blank" style="margin-right: 2rem; font-weight: bold; color: black; text-decoration: none; font-size: 1.2rem; text-transform:uppercase; border-bottom: 2px solid transparent; transition: border-color 0.2s;">Github</a>
+            <a href="studio.html" class="brutal-btn">Open Studio</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-tag">v1.0.0 Alpha</div>
+                <div class="hero-text">
+                    <h1>Animation<br>Without<br>The Drag.</h1>
+                    <p>The open-source kinetic typography engine that feels illegal to use. Build viral short-form content in seconds.</p>
+                </div>
+                <div class="cta-group">
+                    <a href="studio.html" class="brutal-btn">Start Creating &rarr;</a>
+                    <a href="#features" class="brutal-btn" style="background: white;">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-preview">
+                <div id="preview-container"></div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="feature-box">
+                <h3>Native JS</h3>
+                <p>No heavy frameworks. Just pure, unadulterated JavaScript scaling from 0 to 60fps instantly.</p>
+            </div>
+            <div class="feature-box">
+                <h3>Brutalist</h3>
+                <p>Designed with a bold specific Neo-Brutalist aesthetic. Stand out by default.</p>
+            </div>
+            <div class="feature-box" style="border-right:none;">
+                <h3>Studio Mode</h3>
+                <p>Visual timeline editor included. Record and export WebM videos directly from the browser.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div style="font-size: 1.5rem; font-weight: 900; text-transform: uppercase;">Flex Engine</div>
+        <div style="font-family: var(--font-mono); opacity: 0.7;">&copy; 2026 OPEN SOURCE</div>
+    </footer>
+
+    <script src="flex.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const flex = new Flex('preview-container');
+            
+            // High energy, yellow/black theme playlist
+            const playlist = [
+                { 
+                    type: 'Kinetic Bold', 
+                    text: 'FLEX', 
+                    sub: 'ENGINE', 
+                    background: '#FFDE00', // Yellow
+                    color: '#000'
+                },
+                { 
+                    type: 'Kinetic Burst', 
+                    text: 'SPEED', 
+                    sub: 'MATTERS',
+                    background: '#000',
+                    color: '#fff'
+                },
+                { 
+                    type: 'Kinetic Bold', 
+                    text: 'PURE', 
+                    sub: 'JAVASCRIPT',
+                    background: '#fff',
+                    color: '#000'
+                },
+                { 
+                    type: 'Matrix', 
+                    text: 'NEO',
+                    background: '#000'
+                },
+                { 
+                    type: 'Kinetic Burst',
+                    text: 'START',
+                    sub: 'NOW',
+                    background: '#FFDE00',
+                    color: '#000'
+                }
+            ];
+
+            async function runDemo() {
+                while(true) {
+                    await flex.play(playlist);
+                }
+            }
+            
+            runDemo();
+        });
+    </script>
+</body>
+</html>
