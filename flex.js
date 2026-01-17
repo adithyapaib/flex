@@ -9,6 +9,11 @@ class Flex {
         this.container = typeof containerId === 'string' ? document.getElementById(containerId) : containerId;
         if (!this.container) throw new Error(`Flex: Container not found`);
         
+        // Mobile/Showcase Fix: Use container queries for sizing
+        if (!this.container.style.containerType) {
+            this.container.style.containerType = 'inline-size';
+        }
+
         this.options = {
             beat: 1500,
             fastBeat: 1200,
@@ -155,22 +160,10 @@ class Flex {
 
         // If explicitly a number (e.g. 10), treat as rem but make it responsive.
         if (/^-?\d+(\.\d+)?$/.test(val)) {
-            // "10" -> "min(10rem, 15vw)" 
-            // logic: usually 1rem = 16px. 10rem = 160px.
-            // On mobile (375px), 160px is ~42vw. 
-            // We want to CAP it so it doesn't overflow.
-            // A simple heuristic: cap at 18vw per character or similar? 
-            // Better: use clamp() or min().
-
-            // Let's use a simpler approach: Standard rem on desktop, but cap at viewport width % on mobile.
-            // If the user asks for 10rem, that's huge. 
-            // We'll return `clamp(2rem, ${val}rem, 15vw)` might be too small.
-            // Let's rely on CSS `min()`: `min(<val>rem, 20vw)` for very large text.
-
-            // Actually, a safer bet for "Basic" responsiveness without breaking layout is just preventing overflow.
-            // But 'Mobile Friendly' usually implies scaling down.
-
-            return `min(${val}rem, 18vw)`;
+            // Use CQW (Container Query Width) so it works in small boxes (Showcase) AND full screen
+            // 100cqw = 100% of container width
+            // 15cqw is roughly 15% of width.
+            return `min(${val}rem, 18cqw)`; 
         }
         return val;
     }
@@ -511,7 +504,7 @@ class Flex {
 
             'Counter': async (scene, item, ctx) => {
                 const h1 = ctx.createElement('h1', 'pop-in', '');
-                h1.style.fontSize = ctx.getSize(item.fontSize, '10rem');
+                h1.style.fontSize = ctx.getSize(item.fontSize, '8rem');
                 h1.style.fontWeight = '900';
                 scene.appendChild(h1);
 
@@ -540,7 +533,7 @@ class Flex {
 
             'Kinetic Drop': async (scene, item, ctx) => {
                 const title = ctx.createElement('h1', '', item.text || item.title || 'COMING');
-                title.style.cssText = `font-size:${ctx.getSize(item.fontSize, '12rem')}; fontWeight:900; text-transform:uppercase; lineHeight:0.8; zIndex:10; position:relative; transformOrigin:center center;`;
+                title.style.cssText = `font-size:${ctx.getSize(item.fontSize, '10rem')}; fontWeight:900; text-transform:uppercase; lineHeight:0.8; zIndex:10; position:relative; transformOrigin:center center; text-align:center;`;
                 scene.appendChild(title);
                 
                 const tilt = item.tilt !== undefined ? item.tilt : -5;
@@ -554,7 +547,7 @@ class Flex {
                 
                 if (item.sub) {
                     const sub = ctx.createElement('h1', '', item.sub);
-                    sub.style.cssText = `font-size:${ctx.getSize(item.subSize, '12rem')}; fontWeight:900; text-transform:uppercase; lineHeight:0.8; zIndex:1; color:${item.subColor || '#888'}; marginTop:-0.2em;`;
+                    sub.style.cssText = `font-size:${ctx.getSize(item.subSize, '8rem')}; fontWeight:900; text-transform:uppercase; lineHeight:0.8; zIndex:1; color:${item.subColor || '#888'}; marginTop:-0.2em; text-align:center;`;
                     scene.appendChild(sub);
                     
                     sub.animate([
@@ -580,7 +573,7 @@ class Flex {
                      scene.style.color = color;
                      
                      const h1 = ctx.createElement('h1', '', text);
-                     h1.style.fontSize = ctx.getSize(item.fontSize, '12rem'); 
+                    h1.style.fontSize = ctx.getSize(item.fontSize, '10rem'); 
                      h1.style.fontWeight = '900';
                      h1.style.lineHeight = '0.9';
                      h1.style.textTransform = 'uppercase';
@@ -598,6 +591,57 @@ class Flex {
                      
                      await ctx.wait(duration);
                 }
+            },
+
+            'Spotlight': async (scene, item, ctx) => {
+                scene.style.display = 'flex';
+                scene.style.flexDirection = 'column';
+                scene.style.alignItems = 'center';
+                scene.style.justifyContent = 'center';
+                scene.style.textAlign = 'center';
+
+                // Spotlight Effect
+                const accent = item.accent || 'rgba(255,255,255,0.15)';
+                scene.style.background = `radial-gradient(circle at center, ${accent} 0%, ${item.background || '#000'} 70%)`;
+
+                if (item.icon) {
+                    const icon = ctx.createElement('img', '', '');
+                    icon.src = item.icon;
+                    icon.style.cssText = 'height: 15vh; margin-bottom: 2rem; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));';
+                    scene.appendChild(icon);
+
+                    icon.animate([
+                        { transform: 'scale(0) translateY(50px)', opacity: 0 },
+                        { transform: 'scale(1) translateY(0)', opacity: 1 }
+                    ], { duration: 600, easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)' });
+
+                    await ctx.wait(300);
+                }
+
+                if (item.text) {
+                    const h1 = ctx.createElement('h1', '', item.text);
+                    h1.style.cssText = `font-size:${ctx.getSize(item.fontSize, '5rem')}; font-weight:900; line-height:1; margin-bottom:0.5rem; text-transform:uppercase; text-shadow: 0 4px 10px rgba(0,0,0,0.3);`;
+                    scene.appendChild(h1);
+
+                    h1.animate([
+                        { transform: 'translateY(20px)', opacity: 0, filter: 'blur(10px)' },
+                        { transform: 'translateY(0)', opacity: 1, filter: 'blur(0px)' }
+                    ], { duration: 600, easing: 'ease-out', fill: 'forwards' });
+                }
+
+                if (item.sub) {
+                    const p = ctx.createElement('p', '', item.sub);
+                    p.style.cssText = `font-size:${ctx.getSize(item.subSize, '2rem')}; font-weight:500; opacity:0;`;
+                    scene.appendChild(p);
+
+                    await ctx.wait(200);
+                    p.animate([
+                        { transform: 'translateY(10px)', opacity: 0 },
+                        { transform: 'translateY(0)', opacity: 0.8 }
+                    ], { duration: 500, easing: 'ease-out', fill: 'forwards' });
+                }
+
+                await ctx.wait(item.duration || 2000);
             },
 
             'Progress Bar': async (scene, item, ctx) => {
@@ -1214,10 +1258,17 @@ class Flex {
                      wrapper.appendChild(icon);
                  }
          
-                 const parts = (item.text || '').split('^');
+                let parts;
+                if (item.textAfter) {
+                    parts = [item.text || '', item.textAfter];
+                } else {
+                    parts = (item.text || '').split('^');
+                }
+
+                const size = ctx.getSize(item.fontSize, '7rem');
                  
                  const mainText = ctx.createElement('h1', '', parts[0]);
-                 mainText.style.cssText = `font-size:${ctx.getSize(item.fontSize, '7rem')}; font-weight:900; letter-spacing:-0.05em; margin:0; text-transform:uppercase;`;
+                mainText.style.cssText = `font-size:${size}; font-weight:900; letter-spacing:-0.05em; margin:0; text-transform:uppercase;`;
                  wrapper.appendChild(mainText);
          
                  scene.appendChild(wrapper);
@@ -1231,7 +1282,7 @@ class Flex {
          
                  // Caret
                  const caret = ctx.createElement('div', '', '^');
-                 caret.style.cssText = 'position:relative; color:#00d044; font-size:6rem; font-weight:bold; font-family:"Permanent Marker", cursive; z-index:10; margin-left:0.2em; margin-right:0.2em;';
+                caret.style.cssText = `position:relative; color:${item.accent || '#00d044'}; font-size:${size}; font-weight:bold; font-family:"Permanent Marker", cursive; z-index:10; margin-left:0.1em; margin-right:0.1em; line-height: 1;`;
                  
                  wrapper.appendChild(caret);
                  
@@ -1254,14 +1305,16 @@ class Flex {
                  await ctx.wait(200);
          
                  if (item.annotation) {
-                     const note = ctx.createElement('span', '', item.annotation); 
-                     note.style.cssText = 'position:relative; color:#00d044; font-size:4rem; font-family:"Permanent Marker", cursive; white-space:nowrap; margin-left:0.4em; transform:rotate(-5deg); align-self:center;';
+                     const note = ctx.createElement('div', '', item.annotation);
+                     // Changed bottom:0.8em to top:-1.2em to lift it higher
+                     // Increased font-size to 0.7em for legibility
+                     note.style.cssText = `position:absolute; top:-1.2em; left:50%; transform:translateX(-50%) rotate(-5deg); color:${item.accent || '#00d044'}; font-size:0.7em; font-family:"Permanent Marker", cursive; white-space:nowrap; text-shadow: 2px 2px 0px #000; pointer-events:none;`;
                      
-                     wrapper.appendChild(note);
+                     caret.appendChild(note);
          
                      note.animate([
-                         { clipPath: 'polygon(0 0, 0 100%, 0 100%, 0 0)' },
-                         { clipPath: 'polygon(0 0, 0 100%, 100% 100%, 100% 0)' }
+                         { opacity: 0, transform: 'translateX(-50%) rotate(-5deg) translateY(20px)' },
+                         { opacity: 1, transform: 'translateX(-50%) rotate(-5deg) translateY(0)' }
                      ], { duration: 600, easing: 'ease-out', fill: 'forwards' });
                  }
                  
@@ -1525,7 +1578,7 @@ class Flex {
                 scene.style.justifyContent = 'center';
                 
                 const wrapper = ctx.createElement('div', '');
-                wrapper.style.cssText = `display:flex; align-items:baseline; font-size:${ctx.getSize(item.fontSize, '8rem')}; font-weight:900; letter-spacing:-0.04em;`;
+                wrapper.style.cssText = `display:flex; align-items:baseline; font-size:${ctx.getSize(item.fontSize, '6rem')}; font-weight:900; letter-spacing:-0.04em;`;
                 scene.appendChild(wrapper);
 
                 const base = ctx.createElement('span', '', item.text);
@@ -1590,7 +1643,9 @@ class Flex {
                 scene.style.color = fg;
                 
                 const t3 = ctx.createElement('h1', '', item.text2 || 'SERVICES');
-                t3.style.cssText = 'fontSize: 25rem; fontWeight: 900; lineHeight: 0.75; textAlign: center; letterSpacing: -0.06em;';
+                // Use default size of 15rem, but let getSize handle the scaling
+                const size = ctx.getSize(item.fontSize, '15rem');
+                t3.style.cssText = `fontSize: ${size}; fontWeight: 900; lineHeight: 0.75; textAlign: center; letterSpacing: -0.06em;`;
                 scene.appendChild(t3);
                 
                 t3.animate([

@@ -116,7 +116,7 @@ const DEFAULT_SCENE = {
 
 // Define fields available for each animation type
 // Standardized schema: text, sub, background, color, accent, subColor, fontSize, fontFamily, + BG props
-const BASE_PROPS = ['fontFamily', 'backgroundImage', 'backgroundSize'];
+const BASE_PROPS = ['duration', 'fontFamily', 'backgroundImage', 'backgroundSize'];
 
 const SCHEMA = {
     'Introduction Cycle': ['text', 'sub', 'words', 'suffix', 'background', 'color', 'accent', 'subColor', 'fontSize', ...BASE_PROPS],
@@ -128,14 +128,14 @@ const SCHEMA = {
     'Kinetic Sequence': ['items', 'background', 'color', 'fontSize', ...BASE_PROPS],
     'Spotlight': ['text', 'sub', 'background', 'color', 'accent', 'icon', ...BASE_PROPS],
     'Duo Slide': ['top', 'bottom', 'sub', 'background', 'color', 'color1', 'color2', 'fontSize', ...BASE_PROPS],
-    'Title Zoom': ['text', 'sub', 'background', 'color', 'duration', ...BASE_PROPS],
+    'Title Zoom': ['text', 'sub', 'background', 'color', ...BASE_PROPS],
     'Mask Reveal': ['text', 'background', 'color', 'fontSize', ...BASE_PROPS],
     'Glitch Text': ['text', 'sub', 'background', 'color', 'subColor', ...BASE_PROPS],
     'Split': ['title1', 'title2', 'sub', 'background', 'color', 'subColor', ...BASE_PROPS],
     'Grid List': ['items', 'background', 'color', ...BASE_PROPS],
     'Info Card': ['icon', 'text', 'bullets', 'background', 'color', ...BASE_PROPS],
     'Info Card': ['icon', 'text', 'bullets', 'background', 'color', ...BASE_PROPS],
-    'Counter': ['start', 'end', 'duration', 'suffix', 'label', 'labelFont', 'background', 'color', 'fontSize', ...BASE_PROPS],
+    'Counter': ['start', 'end', 'suffix', 'label', 'labelFont', 'background', 'color', 'fontSize', ...BASE_PROPS],
     'Kinetic Greeting': ['text', 'sub', 'subColor', ...BASE_PROPS],
     'Kinetic Names': ['names', 'title', 'suffix', ...BASE_PROPS],
     'Progress Bar': ['text', 'percent', 'sub', 'color', 'fontColor', 'subColor', 'background', ...BASE_PROPS],
@@ -152,7 +152,7 @@ const SCHEMA = {
     'Typing Scroller': ['text', 'background', 'color', 'fontSize', ...BASE_PROPS],
     'Shutter Reveal': ['text', 'background', 'color', 'fontSize', ...BASE_PROPS],
     'Stack Echo': ['text', 'sub', 'background', 'color', 'subColor', 'fontSize', ...BASE_PROPS],
-    'Kinetic Annotation': ['text', 'icon', 'annotation', 'background', 'color', 'fontSize', ...BASE_PROPS],
+    'Kinetic Annotation': ['text', 'textAfter', 'icon', 'annotation', 'accent', 'background', 'color', 'fontSize', ...BASE_PROPS],
     'Kinetic Underline': ['text', 'highlight', 'markColor', 'background', 'color', 'fontSize', ...BASE_PROPS],
     'Kinetic Wobble Align': ['text', 'highlightIndex', 'color', 'background', 'fontSize', ...BASE_PROPS],
     'Kinetic Arrow Cycle': ['prefix', 'items', 'accent', 'background', 'color', 'fontSize', ...BASE_PROPS],
@@ -160,7 +160,7 @@ const SCHEMA = {
     'Kinetic URL Reveal': ['text', 'suffix', 'highlightColor', 'background', 'color', 'fontSize', ...BASE_PROPS],
     'Kinetic Flash Zoom': ['text1', 'joiner', 'text2', 'background', 'color', ...BASE_PROPS],
     'Kinetic Typing': ['text', 'background', 'color', 'fontSize', ...BASE_PROPS],
-    'default': ['text', 'background', 'color', 'duration', ...BASE_PROPS]
+    'default': ['text', 'background', 'color', ...BASE_PROPS]
 };
 
 const STORAGE_KEY = 'flexPlaylist';

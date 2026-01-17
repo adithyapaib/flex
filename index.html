@@ -390,34 +390,34 @@
                 <p>Visual timeline editor included. Record and export WebM videos directly from the browser.</p>
             </div>
         </section>
-<section id="showcase" class="showcase">
-    <div
-        style="background: var(--primary-color); padding: 4rem; text-align: center; border-bottom: var(--border-width) solid var(--border-color);">
-        <h2 style="font-size: 3rem; text-transform: uppercase;">40+ Animations Included</h2>
-        <p style="font-size: 1.5rem; max-width: 600px; margin: 1rem auto; font-weight: 500;">
-            From kinetic typography to data visualizations, Flex comes with a massive library of pre-built
-            scenes.
-        </p>
-    </div>
-    <div class="showcase-grid">
-        <div class="showcase-item">
-            <div id="showcase-3" class="mini-canvas"></div>
-            <div class="showcase-label">Kinetic Greeting</div>
-        </div>
-        <div class="showcase-item">
-            <div id="showcase-1" class="mini-canvas"></div>
-            <div class="showcase-label">Kinetic Typing</div>
-        </div>
-        <div class="showcase-item">
-            <div id="showcase-2" class="mini-canvas"></div>
-            <div class="showcase-label">Glitch Text</div>
-        </div>
-        <div class="showcase-item">
-            <div id="showcase-4" class="mini-canvas"></div>
-            <div class="showcase-label">Kinetic Burst</div>
-        </div>
-    </div>
-</section>
+        <section id="showcase" class="showcase">
+            <div
+                style="background: var(--primary-color); padding: 4rem; text-align: center; border-bottom: var(--border-width) solid var(--border-color);">
+                <h2 style="font-size: 3rem; text-transform: uppercase;">40+ Animations Included</h2>
+                <p style="font-size: 1.5rem; max-width: 600px; margin: 1rem auto; font-weight: 500;">
+                    From kinetic typography to data visualizations, Flex comes with a massive library of pre-built
+                    scenes.
+                </p>
+            </div>
+            <div class="showcase-grid">
+                <div class="showcase-item">
+                    <div id="showcase-3" class="mini-canvas"></div>
+                    <div class="showcase-label">Kinetic Greeting</div>
+                </div>
+                <div class="showcase-item">
+                    <div id="showcase-1" class="mini-canvas"></div>
+                    <div class="showcase-label">Kinetic Typing</div>
+                </div>
+                <div class="showcase-item">
+                    <div id="showcase-2" class="mini-canvas"></div>
+                    <div class="showcase-label">Spotlight</div>
+                    </div>
+                    <div class="showcase-item">
+                        <div id="showcase-4" class="mini-canvas"></div>
+                        <div class="showcase-label">Kinetic Burst</div>
+                    </div>
+                    </div>
+                    </section>
     </main>
 
     <footer>
@@ -435,6 +435,7 @@
 
             // High energy, yellow/black theme playlist
             const playlist = [
+                { type: 'Kinetic Greeting', title: 'Hola', names: ['Bonjour', 'Ciao', 'Namaste'], background: '#FFDE00' },
                 {
                     type: 'Kinetic Bold',
                     text: 'FLEX',
@@ -444,8 +445,8 @@
                 },
                 {
                     type: 'Kinetic Burst',
-                    text: 'SPEED',
-                    sub: 'MATTERS',
+                    text: 'IPHONE',
+                    sub: '17 PRO',
                     background: '#000',
                     color: '#fff'
                 },
@@ -458,7 +459,7 @@
                 },
                 {
                     type: 'Matrix',
-                    text: 'NEO',
+                    text: 'CODE IT',
                     background: '#000'
                 },
                 {
@@ -485,10 +486,27 @@
             const show4 = new Flex('showcase-4');
 
             async function loopShow1() {
-                while (true) await show1.play([{ type: 'Kinetic Typing', text: 'HELLO WORLD', background: '#fff', color: '#000' }]);
+                while (true) await show1.play([{
+                    type: 'Spotlight',
+                    text: 'All Eyes on',
+                    sub: 'India',
+                    icon: 'https://img.icons8.com/emoji/48/india-emoji.png',
+                    background: '#059212',
+                    accent: '#9BEC00',
+                    color: '#FFF',
+                    fontSize: '2rem'
+                }]);
             }
             async function loopShow2() {
-                while (true) await show2.play([{ type: 'Glitch Text', text: 'GLITCH', sub: 'EFFECT', background: '#000', color: '#0f0', subColor: '#fff' }]);
+                while (true) await show2.play([{
+                    type: 'Kinetic Annotation',
+                    text: 'I Am ',
+                    textAfter: 'Happy!',
+                    annotation: 'SUPER',
+                    background: '#fff',
+                    color: '#000',
+                    fontSize: '1vw'
+                }]);
             }
             async function loopShow3() {
                 while (true) await show3.play([{ type: 'Kinetic Greeting', title: 'Hola', names: ['Bonjour', 'Ciao', 'Namaste'], background: '#FFDE00' }]);
