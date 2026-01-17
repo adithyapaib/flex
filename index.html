@@ -1,35 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FLEX | Neo-Brutalist Animation Engine</title>
-    
+
     <!-- SEO & Meta -->
-    <meta name="description" content="Flex is a lightweight, neo-brutalist kinetic typography and animation engine for the web. Create stunning text animations with pure JavaScript.">
-    <meta name="keywords" content="animation, typography, kinetic, web animation, javascript, brutalism, design, video generation">
+    <meta name="description"
+        content="Flex is a lightweight, neo-brutalist kinetic typography and animation engine for the web. Create stunning text animations with pure JavaScript.">
+    <meta name="keywords"
+        content="animation, typography, kinetic, web animation, javascript, brutalism, design, video generation">
     <meta name="author" content="Adithya Pai B">
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://github.com/adithyapaib/flex">
     <meta property="og:title" content="FLEX | Neo-Brutalist Animation Engine">
-    <meta property="og:description" content="Flex is a lightweight, neo-brutalist kinetic typography and animation engine for the web. Create stunning text animations with pure JavaScript.">
+    <meta property="og:description"
+        content="Flex is a lightweight, neo-brutalist kinetic typography and animation engine for the web. Create stunning text animations with pure JavaScript.">
     <meta property="og:image" content="https://img.icons8.com/3d-fluency/94/fire--v2.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://github.com/adithyapaib/flex">
     <meta property="twitter:title" content="FLEX | Neo-Brutalist Animation Engine">
-    <meta property="twitter:description" content="Flex is a lightweight, neo-brutalist kinetic typography and animation engine for the web. Create stunning text animations with pure JavaScript.">
+    <meta property="twitter:description"
+        content="Flex is a lightweight, neo-brutalist kinetic typography and animation engine for the web. Create stunning text animations with pure JavaScript.">
     <meta property="twitter:image" content="https://img.icons8.com/3d-fluency/94/fire--v2.png">
-    
+
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="shortcut icon" href="assets/favicon.png">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@700&display=swap"
+        rel="stylesheet">
     <style>
         body {
             overflow-x: hidden;
@@ -38,7 +44,7 @@
             min-height: 100vh;
             background-color: var(--bg-color);
         }
-        
+
         header {
             display: flex;
             justify-content: space-between;
@@ -61,7 +67,7 @@
             box-shadow: 4px 4px 0 0 black;
             transition: transform 0.1s;
         }
-        
+
         .logo:hover {
             transform: translate(-2px, -2px);
             box-shadow: 6px 6px 0 0 black;
@@ -89,7 +95,7 @@
             align-items: center;
             justify-content: center;
         }
-        
+
         /* Mobile adjustment */
         /* Mobile adjustment */
         /* Mobile adjustment */
@@ -110,17 +116,20 @@
                 display: none !important;
             }
 
-            .hero { 
-                grid-template-columns: 1fr; 
-                grid-template-rows: auto auto; /* Content then Preview */
+            .hero {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto;
+                /* Content then Preview */
                 display: flex;
-                flex-direction: column-reverse; /* Preview on top, Content on bottom */
+                flex-direction: column-reverse;
+                /* Preview on top, Content on bottom */
             }
-            
-            .hero-preview { 
-                border-right: none; 
+
+            .hero-preview {
+                border-right: none;
                 border-bottom: var(--border-width) solid var(--border-color);
-                height: 50vh; /* Fixed height for preview */
+                height: 50vh;
+                /* Fixed height for preview */
                 min-height: 400px;
                 width: 100%;
             }
@@ -137,7 +146,8 @@
             }
 
             .hero-text h1 {
-                font-size: 3.5rem; /* Fallback */
+                font-size: 3.5rem;
+                /* Fallback */
                 font-size: clamp(2.5rem, 12vw, 4rem);
                 line-height: 1;
                 margin-bottom: 1.5rem;
@@ -161,13 +171,13 @@
             }
 
             .features {
-                grid-template-columns: 1fr; 
+                grid-template-columns: 1fr;
             }
-            
+
             .feature-box {
                 padding: 2rem;
             }
-            
+
             footer {
                 flex-direction: column;
                 gap: 1.5rem;
@@ -234,13 +244,19 @@
             transition: all 0.2s;
             position: relative;
         }
-        
-        .feature-box:nth-child(2) { background: #fff; }
-        .feature-box:nth-child(3) { background: #000; color: #fff; }
+
+        .feature-box:nth-child(2) {
+            background: #fff;
+        }
+
+        .feature-box:nth-child(3) {
+            background: #000;
+            color: #fff;
+        }
 
         .feature-box:hover {
             transform: translate(-5px, -5px);
-            box-shadow: 10px 10px 0 0 rgba(0,0,0,0.1);
+            box-shadow: 10px 10px 0 0 rgba(0, 0, 0, 0.1);
             z-index: 10;
         }
 
@@ -275,14 +291,68 @@
             position: absolute;
             pointer-events: none;
         }
+
+        /* Showcase Section */
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .showcase-item {
+            border-bottom: var(--border-width) solid var(--border-color);
+            border-right: var(--border-width) solid var(--border-color);
+            height: 400px;
+            position: relative;
+            background: #fff;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .showcase-item:nth-child(even) {
+            border-right: none;
+        }
+
+        .mini-canvas {
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .showcase-label {
+            padding: 1rem;
+            background: black;
+            color: white;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        /* Mobile adjustment for Showcase */
+        @media (max-width: 768px) {
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .showcase-item {
+                border-right: none;
+                height: 300px;
+            }
+        }
     </style>
 </head>
+
 <body>
 
     <header>
         <div class="logo">Flex</div>
         <nav>
-            <a href="https://github.com/google-deepmind" target="_blank" style="margin-right: 2rem; font-weight: bold; color: black; text-decoration: none; font-size: 1.2rem; text-transform:uppercase; border-bottom: 2px solid transparent; transition: border-color 0.2s;">Github</a>
+            <a href="https://github.com/google-deepmind" target="_blank"
+                style="margin-right: 2rem; font-weight: bold; color: black; text-decoration: none; font-size: 1.2rem; text-transform:uppercase; border-bottom: 2px solid transparent; transition: border-color 0.2s;">Github</a>
             <a href="studio.html" class="brutal-btn">Open Studio</a>
         </nav>
     </header>
@@ -293,7 +363,8 @@
                 <div class="hero-tag">v1.0.0 Alpha</div>
                 <div class="hero-text">
                     <h1>Animation<br>Without<br>The Drag.</h1>
-                    <p>The open-source kinetic typography engine that feels illegal to use. Build viral short-form content in seconds.</p>
+                    <p>The open-source kinetic typography engine that feels illegal to use. Build viral short-form
+                        content in seconds.</p>
                 </div>
                 <div class="cta-group">
                     <a href="studio.html" class="brutal-btn">Start Creating &rarr;</a>
@@ -319,12 +390,41 @@
                 <p>Visual timeline editor included. Record and export WebM videos directly from the browser.</p>
             </div>
         </section>
+<section id="showcase" class="showcase">
+    <div
+        style="background: var(--primary-color); padding: 4rem; text-align: center; border-bottom: var(--border-width) solid var(--border-color);">
+        <h2 style="font-size: 3rem; text-transform: uppercase;">40+ Animations Included</h2>
+        <p style="font-size: 1.5rem; max-width: 600px; margin: 1rem auto; font-weight: 500;">
+            From kinetic typography to data visualizations, Flex comes with a massive library of pre-built
+            scenes.
+        </p>
+    </div>
+    <div class="showcase-grid">
+        <div class="showcase-item">
+            <div id="showcase-3" class="mini-canvas"></div>
+            <div class="showcase-label">Kinetic Greeting</div>
+        </div>
+        <div class="showcase-item">
+            <div id="showcase-1" class="mini-canvas"></div>
+            <div class="showcase-label">Kinetic Typing</div>
+        </div>
+        <div class="showcase-item">
+            <div id="showcase-2" class="mini-canvas"></div>
+            <div class="showcase-label">Glitch Text</div>
+        </div>
+        <div class="showcase-item">
+            <div id="showcase-4" class="mini-canvas"></div>
+            <div class="showcase-label">Kinetic Burst</div>
+        </div>
+    </div>
+</section>
     </main>
 
     <footer>
         <div style="font-size: 1.5rem; font-weight: 900; text-transform: uppercase;">Flex Engine</div>
         <div style="font-family: var(--font-mono); opacity: 0.7;">
-            &copy; 2026 OPEN SOURCE • Made by <a href="https://adithyapaib.com" target="_blank" style="color: inherit; text-decoration: underline;">Adithya Pai</a>
+            &copy; 2026 OPEN SOURCE • Made by <a href="https://adithyapaib.com" target="_blank"
+                style="color: inherit; text-decoration: underline;">Adithya Pai</a>
         </div>
     </footer>
 
@@ -332,36 +432,36 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const flex = new Flex('preview-container');
-            
+
             // High energy, yellow/black theme playlist
             const playlist = [
-                { 
-                    type: 'Kinetic Bold', 
-                    text: 'FLEX', 
-                    sub: 'ENGINE', 
+                {
+                    type: 'Kinetic Bold',
+                    text: 'FLEX',
+                    sub: 'ENGINE',
                     background: '#FFDE00', // Yellow
                     color: '#000'
                 },
-                { 
-                    type: 'Kinetic Burst', 
-                    text: 'SPEED', 
+                {
+                    type: 'Kinetic Burst',
+                    text: 'SPEED',
                     sub: 'MATTERS',
                     background: '#000',
                     color: '#fff'
                 },
-                { 
-                    type: 'Kinetic Bold', 
-                    text: 'PURE', 
+                {
+                    type: 'Kinetic Bold',
+                    text: 'PURE',
                     sub: 'JAVASCRIPT',
                     background: '#fff',
                     color: '#000'
                 },
-                { 
-                    type: 'Matrix', 
+                {
+                    type: 'Matrix',
                     text: 'NEO',
                     background: '#000'
                 },
-                { 
+                {
                     type: 'Kinetic Burst',
                     text: 'START',
                     sub: 'NOW',
@@ -371,13 +471,48 @@
             ];
 
             async function runDemo() {
-                while(true) {
+                while (true) {
                     await flex.play(playlist);
                 }
             }
-            
+
             runDemo();
+
+            // Showcase Animations
+            const show1 = new Flex('showcase-1');
+            const show2 = new Flex('showcase-2');
+            const show3 = new Flex('showcase-3');
+            const show4 = new Flex('showcase-4');
+
+            async function loopShow1() {
+                while (true) await show1.play([{ type: 'Kinetic Typing', text: 'HELLO WORLD', background: '#fff', color: '#000' }]);
+            }
+            async function loopShow2() {
+                while (true) await show2.play([{ type: 'Glitch Text', text: 'GLITCH', sub: 'EFFECT', background: '#000', color: '#0f0', subColor: '#fff' }]);
+            }
+            async function loopShow3() {
+                while (true) await show3.play([{ type: 'Kinetic Greeting', title: 'Hola', names: ['Bonjour', 'Ciao', 'Namaste'], background: '#FFDE00' }]);
+            }
+            async function loopShow4() {
+                while (true) await show4.play([{
+                    type: "Kinetic Burst",
+                    text: "FLEX",
+                    sub: "STUDIO",
+                    background: "#000000",
+                    color: "#ffffff",
+                    secondaryBackground: "#FFDE00",
+                    secondaryColor: "#000000",
+                    fontSize: "12",
+                    subSize: "4"
+                }]);
+            }
+
+            loopShow1();
+            loopShow2();
+            loopShow3();
+            loopShow4();
         });
     </script>
 </body>
+
 </html>
