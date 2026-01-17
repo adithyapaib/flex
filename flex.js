@@ -152,9 +152,26 @@ class Flex {
 
     getSize(val, defaultVal) {
         if (val === undefined || val === null || val === '') return defaultVal;
-        // If it's partially numeric but has no letters (e.g. "12", "12.5") assume rem
-        // using regex to check if it's purely a number (integer or float)
-        if (/^-?\d+(\.\d+)?$/.test(val)) return val + 'rem';
+
+        // If explicitly a number (e.g. 10), treat as rem but make it responsive.
+        if (/^-?\d+(\.\d+)?$/.test(val)) {
+            // "10" -> "min(10rem, 15vw)" 
+            // logic: usually 1rem = 16px. 10rem = 160px.
+            // On mobile (375px), 160px is ~42vw. 
+            // We want to CAP it so it doesn't overflow.
+            // A simple heuristic: cap at 18vw per character or similar? 
+            // Better: use clamp() or min().
+
+            // Let's use a simpler approach: Standard rem on desktop, but cap at viewport width % on mobile.
+            // If the user asks for 10rem, that's huge. 
+            // We'll return `clamp(2rem, ${val}rem, 15vw)` might be too small.
+            // Let's rely on CSS `min()`: `min(<val>rem, 20vw)` for very large text.
+
+            // Actually, a safer bet for "Basic" responsiveness without breaking layout is just preventing overflow.
+            // But 'Mobile Friendly' usually implies scaling down.
+
+            return `min(${val}rem, 18vw)`;
+        }
         return val;
     }
     
